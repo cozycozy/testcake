@@ -11,7 +11,7 @@
 
     <!-- Build -->
     <target name="build"
-        depends="clean,prepare,prepare-caketest,caketest,phpcs,phpcpd,phpmd,phpdoc"/>
+        depends="clean,prepare,caketest,phpcs,phpcpd,phpmd,phpdoc"/>
 
     <!-- Clean up -->
     <target name="clean" description="Cleanup build artifacts">
