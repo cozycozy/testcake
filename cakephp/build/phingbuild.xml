@@ -5,9 +5,9 @@
 -->
 <project name="jenkins" default="build">
     <!-- Properties -->
-    <property name="basedir" value="${phing.dir}" />
-    <property name="appdir"  value="${basedir}/app" />
-    <property name="logdir"  value="${basedir}/build/logs" />
+    <property name="basedir" value="." />
+    <property name="appdir"  value="../app" />
+    <property name="logdir"  value="./build/logs" />
 
     <!-- Build -->
     <target name="build"
@@ -16,33 +16,26 @@
     <!-- Clean up -->
     <target name="clean" description="Cleanup build artifacts">
         <delete dir="${logdir}"/>
-        <delete dir="${basedir}/build/coverage"/>
-        <delete dir="${basedir}/build/phpdoc"/>
+        <delete dir="${basedir}/coverage"/>
+        <delete dir="${basedir}/phpdoc"/>
     </target>
 
     <!-- Prepare -->
     <target name="prepare" depends="clean" description="Prepare for build">
         <mkdir dir="${logdir}"/>
-        <mkdir dir="${basedir}/build/coverage"/>
-        <mkdir dir="${basedir}/build/phpdoc"/>
+        <mkdir dir="${basedir}/coverage"/>
+        <mkdir dir="${basedir}/phpdoc"/>
     </target>
 
     <!-- Prepare CakePHP unit test -->
-    <target name="prepare-caketest" description="Prepare for CakePHP unit test">
-        <copy file="${appdir}/Config/core.php.testing"
-            tofile="${appdir}/Config/core.php" overwrite="true" />
-        <copy file="${appdir}/Config/database.php.testing"
-            tofile="${appdir}/Config/database.php" overwrite="true" />
-        <chmod file="${appdir}/tmp" mode="0777" />
-    </target>
 
     <!-- CakePHP unit test with PHPUnit -->
     <target name="caketest" description="Run CakePHP unit tests with PHPUnit">
-        <exec dir="${basedir}" executable="${basedir}/bin/cake" output="${logdir}/caketest.log">
+        <exec dir="${basedir}" executable="${basedir}/Console/cake" output="${logdir}/caketest.log">
             <arg line="test" />
             <arg line="--configuration=${basedir}/phpunit.xml" />
             <arg line="--log-junit=${logdir}/phpunit.xml" />
-            <arg line="--coverage-html=${basedir}/build/coverage/" />
+            <arg line="--coverage-html=${basedir}/coverage/" />
             <arg line="--coverage-clover=${logdir}/coverage.xml" />
             <arg line="app" />
             <arg line="AllTests" />
@@ -88,7 +81,7 @@
     <target name="phpdoc" description="Generate Application Documentation using PHPDocumentor2">
         <exec dir="${basedir}" executable="phpdoc" output="${logdir}/phpdoc.log">
             <arg line="run" />
-            <arg line="-t ${basedir}/build/phpdoc" />
+            <arg line="-t ${basedir}/phpdoc" />
             <arg line="-d ${appdir}" />
             <arg line="-p" />
         </exec>
