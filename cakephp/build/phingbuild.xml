@@ -7,7 +7,7 @@
     <!-- Properties -->
     <property name="basedir" value="." />
     <property name="appdir"  value="../app" />
-    <property name="logdir"  value="./build/logs" />
+    <property name="logdir"  value="./logs" />
 
     <!-- Build -->
     <target name="build"
@@ -31,7 +31,7 @@
 
     <!-- CakePHP unit test with PHPUnit -->
     <target name="caketest" description="Run CakePHP unit tests with PHPUnit">
-        <exec dir="${basedir}" executable="${basedir}/Console/cake" output="${logdir}/caketest.log">
+        <exec dir="${basedir}" executable="${appdir}/Console/cake" output="${logdir}/caketest.log">
             <arg line="test" />
             <arg line="--configuration=${basedir}/phpunit.xml" />
             <arg line="--log-junit=${logdir}/phpunit.xml" />
