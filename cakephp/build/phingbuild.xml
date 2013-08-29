@@ -31,7 +31,7 @@
 
     <!-- CakePHP unit test with PHPUnit -->
     <target name="caketest" description="Run CakePHP unit tests with PHPUnit">
-        <exec dir="${basedir}" executable="${appdir}/Console/cake" output="${logdir}/caketest.log">
+        <exec dir="${appdir}" executable="${appdir}/Console/cake" output="${logdir}/caketest.log">
             <arg line="test" />
             <arg line="--configuration=${basedir}/phpunit.xml" />
             <arg line="--log-junit=${logdir}/phpunit.xml" />
@@ -44,7 +44,7 @@
 
     <!-- PHPCodeSniffer -->
     <target name="phpcs" description="Find coding standard violations using PHP_CodeSniffer.">
-        <exec dir="${basedir}" executable="phpcs" output="${logdir}/phpcs.log">
+        <exec dir="${appdir}" executable="phpcs" output="${logdir}/phpcs.log">
             <arg line="--standard=${basedir}/phpcs.xml" />
             <arg line="--report=checkstyle" />
             <arg line="--report-file=${logdir}/phpcs.xml" />
@@ -54,7 +54,7 @@
 
     <!-- PHPMD -->
     <target name="phpmd" description="Perform project mess detection using PHPMD">
-        <exec dir="${basedir}" executable="phpmd" output="${logdir}/phpmd.log">
+        <exec dir="${appdir}" executable="phpmd" output="${logdir}/phpmd.log">
             <arg line="${appdir}" />
             <arg line="xml" />
             <arg line="${basedir}/phpmd-rule.xml" />
@@ -66,7 +66,7 @@
 
     <!-- PHPCPD -->
     <target name="phpcpd" description="Perform project mess detection using PHPMD">
-        <exec dir="${basedir}" executable="phpcpd" output="${logdir}/phpcpd.log">
+        <exec dir="${appdir}" executable="phpcpd" output="${logdir}/phpcpd.log">
             <arg line="--log-pmd ${logdir}/phpcpd.xml" />
             <arg line="--exclude Config/Schema" />
             <arg line="--exclude Config/Migration" />
@@ -79,7 +79,7 @@
 
     <!-- PHPDocumentor -->
     <target name="phpdoc" description="Generate Application Documentation using PHPDocumentor2">
-        <exec dir="${basedir}" executable="phpdoc" output="${logdir}/phpdoc.log">
+        <exec dir="${appdir}" executable="phpdoc" output="${logdir}/phpdoc.log">
             <arg line="run" />
             <arg line="-t ${basedir}/phpdoc" />
             <arg line="-d ${appdir}" />
